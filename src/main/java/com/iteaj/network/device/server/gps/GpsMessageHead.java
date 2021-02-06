@@ -33,7 +33,7 @@ public class GpsMessageHead implements Message.MessageHead {
     }
 
     /**
-     * 构建响应报文
+     * 构建平台响应设备的报文
      * @param equipCode 设备编号或者手机号
      * @param messageId
      * @param type
@@ -41,22 +41,48 @@ public class GpsMessageHead implements Message.MessageHead {
      * @return
      */
     public static GpsMessageHead resp(String equipCode, String messageId, GpsProtocolType type, int bodyLength) {
-        GpsMessageHead messageHead = new GpsMessageHead(equipCode, messageId, type, Integer.toBinaryString(bodyLength));
+        Integer id = Integer.valueOf(messageId) + 1;
+
+        GpsMessageHead messageHead = new GpsMessageHead(equipCode, id+"", type, Integer.toBinaryString(bodyLength));
         byte[] message = new byte[12];
 
         ByteUtil.addBytes(message, ByteUtil.hexToByte(type.code), 0);
-        ByteUtil.addBytes(message, ByteUtil.shortToBytes(Integer.valueOf(bodyLength).shortValue()), 2);
+        ByteUtil.addBytes(message, ByteUtil.shortToBytesOfNegate(Integer.valueOf(bodyLength).shortValue()), 2);
         ByteUtil.addBytes(message, ByteUtil.str2Bcd(equipCode), 4);
-        Integer id = Integer.valueOf(messageId) + 1;
-        ByteUtil.addBytes(message, ByteUtil.shortToBytes(id.shortValue()), 10);
 
-        System.out.println("响应报文头" + ByteUtil.bytesToHex(message));
+        ByteUtil.addBytes(message, ByteUtil.shortToBytesOfNegate(id.shortValue()), 10);
+
         messageHead.message=message;
         return messageHead;
     }
 
     /**
-     * 构建请求报文
+     * 构建平台主动请求设备的报文头
+     * @param equipCode
+     * @param messageId
+     * @param type
+     * @param bodyLength
+     * @return
+     */
+    public static GpsMessageHead req(String equipCode, String messageId, GpsProtocolType type, int bodyLength) {
+        Integer id = (Integer.valueOf(messageId) + 1);
+
+        GpsMessageHead messageHead = new GpsMessageHead(equipCode, id+"", type, Integer.toBinaryString(bodyLength));
+        byte[] message = new byte[12];
+
+        ByteUtil.addBytes(message, ByteUtil.hexToByte(type.code), 0);
+        ByteUtil.addBytes(message, ByteUtil.shortToBytesOfNegate(Integer.valueOf(bodyLength).shortValue()), 2);
+        ByteUtil.addBytes(message, ByteUtil.str2Bcd(equipCode), 4);
+
+        ByteUtil.addBytes(message, ByteUtil.shortToBytesOfNegate(id.shortValue()), 10);
+
+        System.out.println("请求报文MessageId：" + messageId);
+        messageHead.message=message;
+        return messageHead;
+    }
+
+    /**
+     * 构建设备主动请求的报文
      * @param message
      * @return
      */
@@ -65,7 +91,7 @@ public class GpsMessageHead implements Message.MessageHead {
 
         String equipCode = ByteUtil.bcdToStr(message, 4, 6);
 
-        String messageId = ByteUtil.bytesToShort(message, 10) + "";
+        String messageId = ByteUtil.bytesToShortOfNegate(message, 10) + "";
 
         String binaryString = Integer.toBinaryString(ByteUtil.bytesToShort(message, 2));
         GpsMessageHead gpsMessageHead = new GpsMessageHead(equipCode, messageId, type, binaryString);

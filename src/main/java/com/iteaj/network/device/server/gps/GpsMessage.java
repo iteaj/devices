@@ -57,9 +57,8 @@ public class GpsMessage extends UnParseBodyMessage {
         GpsMessageHead requestHead = (GpsMessageHead) request.getHead();
 
         // 构建报文头
-        GpsMessageHead respHead = GpsMessageHead.resp(requestHead.getEquipCode(), requestHead.getMessageId()
-                , GpsProtocolType.PResp, 5);
-
+        GpsMessageHead respHead = GpsMessageHead.resp(requestHead.getEquipCode()
+                , requestHead.getMessageId(), GpsProtocolType.PResp, 5);
 
         // 构建报文体
         byte[] bodyMessage = new byte[5];
@@ -67,6 +66,23 @@ public class GpsMessage extends UnParseBodyMessage {
         ByteUtil.addBytes(bodyMessage, ByteUtil.hexToByte(requestHead.getTradeType().code), 2);
         ByteUtil.addBytes(bodyMessage, result.code, 4);
 
+        GpsMessageBody body = new GpsMessageBody(bodyMessage);
+
+        return new GpsMessage(respHead, body);
+    }
+
+    /**
+     * 构建通用的报文, 无报文体
+     * @return
+     */
+    public static GpsMessage buildPlatformEmptyBodyReqMessage(String equipCode, String messageId, GpsProtocolType type) {
+
+        // 构建报文头
+        GpsMessageHead respHead = GpsMessageHead.req(equipCode, messageId, type, 0);
+
+
+        // 构建报文体
+        byte[] bodyMessage = new byte[]{};
         GpsMessageBody body = new GpsMessageBody(bodyMessage);
 
         return new GpsMessage(respHead, body);

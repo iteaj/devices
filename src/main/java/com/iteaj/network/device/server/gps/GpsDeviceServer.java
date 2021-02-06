@@ -28,6 +28,6 @@ public class GpsDeviceServer extends AbstractDeviceServer {
 
     @Override
     public String desc() {
-        return "道路运输车辆主动安全智能防控系统";
+        return "道路运输车辆卫星定位系统";
     }
 }
