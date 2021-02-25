@@ -20,7 +20,7 @@ public class ThsDeviceServer extends AbstractDeviceServer {
     }
 
     @Override
-    protected ChannelInboundHandlerAdapter getMessageDecoder() {
+    public ChannelInboundHandlerAdapter getMessageDecoder() {
         return new THSElfinDecoder();
     }
 }

@@ -28,7 +28,6 @@ public class DeviceServerProperties {
 
     /**
      * Gps定位设备 <h4>道路运输车辆主动安全智能防控系统</h4>
-     * @see com.iteaj.network.device.server.gps.GpsDeviceServer
      */
     private ServerConfig gps;
 

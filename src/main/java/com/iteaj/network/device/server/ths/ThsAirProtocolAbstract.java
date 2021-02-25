@@ -1,9 +1,6 @@
 package com.iteaj.network.device.server.ths;
 
-import com.iteaj.network.AbstractMessage;
-import com.iteaj.network.IotServeBootstrap;
-import com.iteaj.network.Message;
-import com.iteaj.network.ProtocolException;
+import com.iteaj.network.*;
 import com.iteaj.network.consts.ExecStatus;
 import com.iteaj.network.server.DeviceServerComponent;
 import com.iteaj.network.server.protocol.PlatformRequestProtocol;
@@ -26,7 +23,7 @@ public abstract class ThsAirProtocolAbstract extends ThsPlatformProtocol{
         AbstractMessage message = (AbstractMessage) requestMessage();
 
         // 同一设备不能在同一时间有多个操作, 否则区分不出是那个操作
-        DeviceServerComponent serverComponent = IotServeBootstrap.getServerComponent(message.getClass());
+        FrameworkComponent serverComponent = IotServeBootstrap.getServerComponent(message.getClass());
         if(serverComponent.protocolFactory().isExists(relationKey())) {
             throw new ProtocolException("设备不支持同一时间下发多条指令, 请使用同步方式(sync), 依次下发指令");
         }

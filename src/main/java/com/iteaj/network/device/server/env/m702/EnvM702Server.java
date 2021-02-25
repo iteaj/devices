@@ -14,7 +14,7 @@ public class EnvM702Server extends AbstractDeviceServer {
     }
 
     @Override
-    protected ChannelInboundHandlerAdapter getMessageDecoder() {
+    public ChannelInboundHandlerAdapter getMessageDecoder() {
         return new EnvM702Decoder();
     }
 

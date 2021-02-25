@@ -7,6 +7,7 @@ import com.iteaj.network.device.server.env.m702.EnvM702ServerComponent;
 import com.iteaj.network.device.server.gps.GpsServerComponent;
 import com.iteaj.network.device.server.ths.ThsServerComponent;
 import com.iteaj.network.device.server.pdu.PduServerComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,6 +16,9 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnClass(name = "com.iteaj.network.IotServeBootstrap")
 @EnableConfigurationProperties({DeviceServerProperties.class})
 public class DeviceServerConfiguration {
+
+    @Autowired
+    private DeviceServerProperties serverProperties;
 
     /**
      * 智慧融合控制台服务组件
@@ -64,6 +68,6 @@ public class DeviceServerConfiguration {
     @Bean
     @ConditionalOnExpression("!${iot.device.server.gps.port:'0'}.equals('0')")
     public GpsServerComponent gpsServerComponent() {
-        return new GpsServerComponent();
+        return new GpsServerComponent(serverProperties.getGps());
     }
 }

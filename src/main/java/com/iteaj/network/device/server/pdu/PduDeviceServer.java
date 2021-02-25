@@ -21,7 +21,7 @@ public class PduDeviceServer extends AbstractDeviceServer {
     }
 
     @Override
-    protected ChannelInboundHandlerAdapter getMessageDecoder() {
+    public ChannelInboundHandlerAdapter getMessageDecoder() {
         return new PduProtocolDecoder(1024);
     }
 }
