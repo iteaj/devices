@@ -2,6 +2,7 @@ package com.iteaj.network.device.server;
 
 import com.iteaj.network.IotServeBootstrap;
 import com.iteaj.network.device.client.DeviceClientProperties;
+import com.iteaj.network.device.server.aava.AavaServerComponent;
 import com.iteaj.network.device.server.env.EnvServerComponent;
 import com.iteaj.network.device.server.env.m702.EnvM702ServerComponent;
 import com.iteaj.network.device.server.gps.GpsServerComponent;
@@ -69,5 +70,15 @@ public class DeviceServerConfiguration {
     @ConditionalOnExpression("!${iot.device.server.gps.port:'0'}.equals('0')")
     public GpsServerComponent gpsServerComponent() {
         return new GpsServerComponent(serverProperties.getGps());
+    }
+
+    /**
+     * 声光报警器设备组件
+     * @return
+     */
+    @Bean
+    @ConditionalOnExpression("!${iot.device.server.aava.port:'0'}.equals('0')")
+    public AavaServerComponent aavaServerComponent() {
+        return new AavaServerComponent(serverProperties.getAava());
     }
 }

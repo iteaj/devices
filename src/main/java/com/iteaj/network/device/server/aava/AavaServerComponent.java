@@ -11,18 +11,16 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
 import io.netty.util.ReferenceCountUtil;
-import org.springframework.stereotype.Component;
 
 /**
  * 声光报警服务端组件
  */
-@Component
 public class AavaServerComponent extends ByteToMessageDecoderComponentAdapter<AavaMessage> {
 
     private static final String DEVICE_SN = "DEVICE_SN";
 
-    public AavaServerComponent() {
-        super(new DeviceProperties(8093));
+    public AavaServerComponent(DeviceProperties properties) {
+        super(properties);
     }
 
     @Override

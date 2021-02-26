@@ -31,6 +31,11 @@ public class DeviceServerProperties {
      */
     private ServerConfig gps;
 
+    /**
+     * 声光报警器
+     */
+    private ServerConfig aava;
+
     public ServerConfig getPdu() {
         return pdu;
     }
@@ -69,6 +74,14 @@ public class DeviceServerProperties {
 
     public void setGps(ServerConfig gps) {
         this.gps = gps;
+    }
+
+    public ServerConfig getAava() {
+        return aava;
+    }
+
+    public void setAava(ServerConfig aava) {
+        this.aava = aava;
     }
 
     public static class ServerConfig extends DeviceProperties {
