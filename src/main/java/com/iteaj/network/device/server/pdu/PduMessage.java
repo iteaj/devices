@@ -66,16 +66,22 @@ public class PduMessage extends UnParseBodyMessage {
 
     public static class PduMessageHead extends DeviceMessageHead {
 
+        private String checkSum;
+
         public PduMessageHead(String messageId, String equipCode, PduTradeType tradeType) {
-            this(messageId, equipCode, tradeType, null);
+            super(new byte[0], messageId, equipCode, tradeType);
         }
 
         public PduMessageHead(String equipCode, PduTradeType tradeType) {
-            this(null, equipCode, tradeType);
+            super(new byte[0], null, equipCode, tradeType);
         }
 
-        public PduMessageHead(String messageId, String equipCode, PduTradeType tradeType, String checkSum) {
-            super(null, checkSum, messageId, equipCode, tradeType);
+        public String getCheckSum() {
+            return checkSum;
+        }
+
+        public void setCheckSum(String checkSum) {
+            this.checkSum = checkSum;
         }
     }
 

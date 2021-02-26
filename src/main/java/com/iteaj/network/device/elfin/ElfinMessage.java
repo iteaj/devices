@@ -36,7 +36,7 @@ public abstract class ElfinMessage extends UnParseBodyMessage {
         return tradeType;
     }
 
-    public void setTradeType(ElfinType tradeType) {
+    public void setTradeType(ProtocolType tradeType) {
         this.tradeType = tradeType;
     }
 
