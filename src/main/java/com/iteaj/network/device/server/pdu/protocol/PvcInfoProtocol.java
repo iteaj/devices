@@ -67,7 +67,7 @@ public class PvcInfoProtocol extends PduDeviceProtocol{
 
         this.tflag = PduMessageUtil.getString(content, ++index);
         if(this.tflag.equals("1")) { // 有温度传感器
-            this.t = PduMessageUtil.getInteger(content, ++index);
+            this.t = PduMessageUtil.getInteger(content, ++index) / 10;
             this.f = PduMessageUtil.getInteger(content, ++index);
             this.h = PduMessageUtil.getInteger(content, ++index);
         }
