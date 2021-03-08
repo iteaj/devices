@@ -7,6 +7,7 @@ public enum ElfinType implements ProtocolType {
     Env_Elfin_Info("环境监测 - 监测信息"),
     Env_Elfin_THS("环境监测 - 温湿度烟雾"),
     Env_Elfin_M702("环境监测 - 7合一环境监测"),
+    Env_Elfin_Nh3("环境监测 - 氨气"),
 
     Air_Unknow("空调红外设备 -  未知协议"),
     Air_Switch_status("空调红外设备 - 开关控制(需先设定空调型号)"),
