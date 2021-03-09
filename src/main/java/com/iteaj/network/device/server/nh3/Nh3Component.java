@@ -9,19 +9,17 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
-import org.springframework.stereotype.Component;
 
 /**
  * @author sky
  * @date 2021/3/2 10:26 上午
  */
-@Component
 public class Nh3Component extends ByteToMessageDecoderComponentAdapter<Nh3Message> {
 
     AttributeKey deviceKey = AttributeKey.newInstance("DEVICE_SN");
 
-    public Nh3Component() {
-        super(new DeviceProperties(8096));
+    public Nh3Component(DeviceProperties properties) {
+        super(properties);
     }
 
     @Override

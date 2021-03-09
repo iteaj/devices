@@ -36,6 +36,11 @@ public class DeviceServerProperties {
      */
     private ServerConfig aava;
 
+    /**
+     * 氨气
+     */
+    private ServerConfig nh3;
+
     public ServerConfig getPdu() {
         return pdu;
     }
@@ -82,6 +87,14 @@ public class DeviceServerProperties {
 
     public void setAava(ServerConfig aava) {
         this.aava = aava;
+    }
+
+    public ServerConfig getNh3() {
+        return nh3;
+    }
+
+    public void setNh3(ServerConfig nh3) {
+        this.nh3 = nh3;
     }
 
     public static class ServerConfig extends DeviceProperties {

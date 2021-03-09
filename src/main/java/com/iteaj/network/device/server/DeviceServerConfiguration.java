@@ -6,6 +6,7 @@ import com.iteaj.network.device.server.aava.AavaServerComponent;
 import com.iteaj.network.device.server.env.EnvServerComponent;
 import com.iteaj.network.device.server.env.m702.EnvM702ServerComponent;
 import com.iteaj.network.device.server.gps.GpsServerComponent;
+import com.iteaj.network.device.server.nh3.Nh3Component;
 import com.iteaj.network.device.server.ths.ThsServerComponent;
 import com.iteaj.network.device.server.pdu.PduServerComponent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +81,15 @@ public class DeviceServerConfiguration {
     @ConditionalOnExpression("!${iot.device.server.aava.port:'0'}.equals('0')")
     public AavaServerComponent aavaServerComponent() {
         return new AavaServerComponent(serverProperties.getAava());
+    }
+
+    /**
+     * 氨气设备组件
+     * @return
+     */
+    @Bean
+    @ConditionalOnExpression("!${iot.device.server.nh3.port:'0'}.equals('0')")
+    public Nh3Component nh3Component() {
+        return new Nh3Component(serverProperties.getNh3());
     }
 }
