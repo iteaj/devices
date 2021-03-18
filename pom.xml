@@ -11,7 +11,7 @@
     <description>具体设备的协议实现(已实现的设备库)</description>
 
     <properties>
-        <iot-version>1.1.1-SNAPSHOT</iot-version>
+        <iot-version>1.1.1</iot-version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
