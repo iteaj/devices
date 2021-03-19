@@ -7,8 +7,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 
 public class LightonClient extends UdpNettyClient {
 
-    public LightonClient(UdpClientComponent clientComponent) {
+    private int port;
+    private String host;
+
+    public LightonClient(UdpClientComponent clientComponent, int port, String host) {
         super(clientComponent);
+        this.port = port;
+        this.host = host;
     }
 
     @Override
@@ -23,11 +28,11 @@ public class LightonClient extends UdpNettyClient {
 
     @Override
     public int getPort() {
-        return 4001;
+        return this.port;
     }
 
     @Override
     public String getHost() {
-        return "114.215.156.78";
+        return this.host;
     }
 }

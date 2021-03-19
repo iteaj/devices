@@ -4,14 +4,19 @@ import com.iteaj.iot.client.udp.UdpClientComponent;
 import com.iteaj.iot.client.udp.UdpNettyClient;
 import com.iteaj.network.ProtocolFactory;
 import com.iteaj.network.client.ClientMessage;
-import org.springframework.stereotype.Component;
+import com.iteaj.network.device.client.DeviceClientProperties;
 
-@Component
-public class LightonUdpComponent extends UdpClientComponent {
+public class LightonMediaCUComponent extends UdpClientComponent {
+
+    private DeviceClientProperties.ClientConfig config;
+
+    public LightonMediaCUComponent(DeviceClientProperties.ClientConfig config) {
+        this.config = config;
+    }
 
     @Override
     protected UdpNettyClient createNettyClient() {
-        return new LightonClient(this);
+        return new LightonClient(this, config.getPort(), config.getHost());
     }
 
     @Override

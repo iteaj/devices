@@ -16,6 +16,11 @@ public class DeviceClientProperties {
      */
     private ClientConfig lrm;
 
+    /**
+     * 来同多媒体中控
+     */
+    private ClientConfig lcu;
+
     public ClientConfig getFzb() {
         return fzb;
     }
@@ -32,6 +37,14 @@ public class DeviceClientProperties {
         this.lrm = lrm;
     }
 
+    public ClientConfig getLcu() {
+        return lcu;
+    }
+
+    public void setLcu(ClientConfig lcu) {
+        this.lcu = lcu;
+    }
+
     public static class ClientConfig extends DeviceProperties {
 
         /**
@@ -39,12 +52,25 @@ public class DeviceClientProperties {
          */
         private boolean start;
 
+        /**
+         * 主机
+         */
+        private String host;
+
         public boolean isStart() {
             return start;
         }
 
         public void setStart(boolean start) {
             this.start = start;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
         }
     }
 }
