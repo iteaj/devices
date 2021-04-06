@@ -28,14 +28,13 @@ public class JlznDeviceListInfo extends JlznHttpProtocolAdapter{
     @Override
     protected void resolverResponseMessage(HttpResponseMessage content) {
         int code = content.getCode();
+        final String message = content.getMessage("UTF-8");
         if(code == 200) {
-            String message = content.getMessage("UTF-8");
-
             JSONObject jsonObject = JSONUtil.parseObj(message);
             JSONArray jsonArray = jsonObject.getJSONArray("response_params");
             this.devices = JSONUtil.toList(jsonArray, JlznEntity.class);
-        } else {
-            throw new ProtocolException("请求失败, 状态码["+code+"]");
+        } else{
+            throw new ProtocolException("请求失败, 状态码["+code+"]["+message+"]");
         }
     }
 
